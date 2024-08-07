@@ -1,0 +1,22 @@
+{
+  "name": "jesttesting",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MaxBWiseman/JestTesting.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MaxBWiseman/JestTesting/issues"
+  },
+  "homepage": "https://github.com/MaxBWiseman/JestTesting#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
