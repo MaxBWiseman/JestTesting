@@ -3,6 +3,7 @@ let game = {
     currentGame: [],
     playerMoves: [],
     choices: ["button1", "button2", "button3", "button4"],
+    turnNumber: 0
 }
 //the game object contains the score, currentGame, playerMoves, and choices keys. The choices key contains an array of the ids of the buttons in the game
 
@@ -10,6 +11,7 @@ const newGame = function () {
     game.score = 0;
     game.currentGame = [];
     game.playerMoves = [];
+    game.turnNumber = 0;
     showScore()
     addTurn()
 }
