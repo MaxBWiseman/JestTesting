@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-const { game, newGame, showScore } = require("/workspace/JestTesting/assets/scripts/game.js");
+const { game, newGame, showScore, addTurn } = require("/workspace/JestTesting/assets/scripts/game.js");
 
 beforeAll(() => {
     let fs = require("fs");
@@ -45,8 +45,8 @@ describe("newGame function works correctly", () => {
    test('score is reset to 0', () => {
        expect(game.score).toBe(0)
    })
-   test('currentGame is an empty array', () => {
-       expect(game.currentGame).toEqual([])
+   test('currentGame is an array with one item', () => {
+       expect(game.currentGame.length).toBe(1)
    })
     test('playerMoves is an empty array', () => {
          expect(game.playerMoves).toEqual([])

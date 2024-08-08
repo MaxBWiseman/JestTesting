@@ -10,10 +10,19 @@ const newGame = function () {
     game.currentGame = [];
     game.playerMoves = [];
     showScore()
+    addTurn()
 }
+
+const addTurn = () => {
+    game.playerMoves = [];
+    game.currentGame.push(game.choices[Math.floor(Math.random() * 4)]);
+    // showTurns()
+}
+
+
 
 const showScore = () => document.getElementById("score").textContent = game.score;
     
 
 
-module.exports = { game, newGame, showScore };
+module.exports = { game, newGame, showScore, addTurn };
