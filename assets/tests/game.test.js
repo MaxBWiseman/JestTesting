@@ -2,7 +2,15 @@
  * @jest-environment jsdom
  */
 
-const { game, newGame, showScore, addTurn, lightsOn, showTurns } = require("/workspace/JestTesting/assets/scripts/game.js");
+const {
+    game,
+    newGame,
+    showScore,
+    addTurn,
+    lightsOn,
+    showTurns,
+    playerTurnCompare
+} = require("/workspace/JestTesting/assets/scripts/game.js");
 
 beforeAll(() => {
     let fs = require("fs");
@@ -44,15 +52,15 @@ describe("newGame function works correctly", () => {
         game.playerMoves = [1, 2, 3, 4];
         document.getElementById("score").textContent = game.score;
         newGame()
-   })
-   test('score is reset to 0', () => {
-       expect(game.score).toBe(0)
-   })
-   test('currentGame is an array with one item', () => {
-       expect(game.currentGame.length).toBe(1)
-   })
+    })
+    test('score is reset to 0', () => {
+        expect(game.score).toBe(0)
+    })
+    test('currentGame is an array with one item', () => {
+        expect(game.currentGame.length).toBe(1)
+    })
     test('playerMoves is an empty array', () => {
-         expect(game.playerMoves).toEqual([])
+        expect(game.playerMoves).toEqual([])
     })
     test('score text content is 0', () => {
         expect(document.getElementById("score").textContent).toBe("0")
@@ -61,7 +69,7 @@ describe("newGame function works correctly", () => {
         let circles = document.querySelectorAll(".circle")
         for (let circle of circles) {
             expect(circle.getAttribute("data-listener")).toBe("true")
-        }  
+        }
     })
 })
 
@@ -88,10 +96,15 @@ describe('gameplay functions work correctly', () => {
         expect(button.classList).toContain("light");
     });
     test('showTurns should update game.turnNumber', () => {
-            game.turnNumber = 42;
-            showTurns();
-            expect(game.turnNumber).toBe(0);
-        });
+        game.turnNumber = 42;
+        showTurns();
+        expect(game.turnNumber).toBe(0);
+    });
+    test('should increment score if the turn is correct', () => {
+        game.playerMoves.push(game.currentGame[0]);
+        playerTurnCompare();
+        expect(game.score).toBe(1);
 
     });
 
+});
