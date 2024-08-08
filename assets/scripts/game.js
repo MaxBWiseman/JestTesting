@@ -3,7 +3,9 @@ let game = {
     currentGame: [],
     playerMoves: [],
     choices: ["button1", "button2", "button3", "button4"],
-    turnNumber: 0
+    turnNumber: 0,
+    turnInProgress: false,
+    lastButton: ""
 }
 //the game object contains the score, currentGame, playerMoves, and choices keys. The choices key contains an array of the ids of the buttons in the game
 
@@ -12,6 +14,8 @@ const newGame = function () {
     game.currentGame = [];
     game.playerMoves = [];
     game.turnNumber = 0;
+    game.lastButton = ""
+    game.turnInProgress = false;
     for (let circle of document.querySelectorAll(".circle")) { //get all elements with the class .circle
         if (circle.getAttribute("data-listener") !== "true") { //if the data-listener attribute is not true
             circle.addEventListener("click", (e) => { //add an event listener to the circle
