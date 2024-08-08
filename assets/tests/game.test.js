@@ -55,3 +55,27 @@ describe("newGame function works correctly", () => {
         expect(document.getElementById("score").textContent).toBe("0")
     })
 })
+
+describe('gameplay functions work correctly', () => {
+    beforeEach(() => {
+        game.score = 0;
+        game.currentGame = [];
+        game.playerMoves = [];
+        addTurn()
+    });
+    afterEach(() => {
+        game.score = 0;
+        game.currentGame = [];
+        game.playerMoves = [];
+    });
+    test('addTurn adds a new turn to the game', () => {
+        addTurn()
+        expect(game.currentGame.length).toBe(2)
+    });
+    test('should add correct class to button', () => {
+        let button = document.getElementById(game.currentGame[0]);
+        lightOn(game.currentGame[0]);
+        expect(button.classList).toContain("light");
+    });
+
+});
