@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-const { game, newGame } = require("/workspace/JestTesting/assets/scripts/game.js");
+const { game, newGame, showScore } = require("/workspace/JestTesting/assets/scripts/game.js");
 
 beforeAll(() => {
     let fs = require("fs");

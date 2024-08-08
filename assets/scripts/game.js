@@ -12,8 +12,8 @@ const newGame = function () {
     showScore()
 }
 
-const showScore = function () {
-    document.getElementById("score").textContent = game.score;
-}
+const showScore = () => document.getElementById("score").textContent = game.score;
+    
 
-module.exports = { game, newGame };
+
+module.exports = { game, newGame, showScore };
