@@ -57,7 +57,14 @@ describe("newGame function works correctly", () => {
     test('score text content is 0', () => {
         expect(document.getElementById("score").textContent).toBe("0")
     })
+    test('is data-listener attribute true on all circles', () => {
+        let circles = document.querySelectorAll(".circle")
+        for (let circle of circles) {
+            expect(circle.getAttribute("data-listener")).toBe("true")
+        }  
+    })
 })
+
 
 describe('gameplay functions work correctly', () => {
     beforeEach(() => {

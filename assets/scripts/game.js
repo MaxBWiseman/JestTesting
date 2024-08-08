@@ -12,8 +12,19 @@ const newGame = function () {
     game.currentGame = [];
     game.playerMoves = [];
     game.turnNumber = 0;
-    showScore()
-    addTurn()
+    for (let circle of document.querySelectorAll(".circle")) {//get all elements with the class .circle
+        if (circle.getAttribute("data-listener") !== "true") {//if the data-listener attribute is not true
+            circle.addEventListener("click", (e) => {//add an event listener to the circle
+                let move = e.target.getAttribute("id");//get the id of the circle the user has clicked
+                lightsOn(move)//call the lightsOn function to flash the circle the user has clicked
+                game.playerMoves.push(move)//add the move to the playerMoves array
+                playerTurnCompare()
+            })
+            circle.setAttribute("data-listener", "true")//set the data-listener attribute to true
+        }
+    }
+    showScore()//call the showScore function to display the score on the screen
+    addTurn()//call the addTurn function to add a computer turn to the game for user to memorize
 }
 //newGame function resets the score to 0, currentGame to an empty array, playerMoves to an empty array, adds a turn to the game for player to follow
 
@@ -28,7 +39,7 @@ const showScore = () => document.getElementById("score").textContent = game.scor
 //showScore function is a function that displays the score on the screen from the game object
 
 const lightsOn = (circ) => {
-    document.getElementById(circ).classList.add("light");
+    document.getElementById(circ).classList.add("light");//adds the light class to the circle so it has a flashing effect
     setTimeout(() => {//setTimeout is a function that allows a delay in the execution of a function, here it is 400miliseconds
         document.getElementById(circ).classList.remove("light");
     }, 400);//setTimeout speed declared here
