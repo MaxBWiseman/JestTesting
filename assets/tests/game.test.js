@@ -3,6 +3,9 @@
  */
 
 const {
+    default: JSDOMEnvironment
+} = require("jest-environment-jsdom");
+const {
     game,
     newGame,
     showScore,
@@ -11,6 +14,15 @@ const {
     showTurns,
     playerTurnCompare
 } = require("/workspace/JestTesting/assets/scripts/game.js");
+
+jest.spyOn(window, "alert").mockImplementation(() => {});
+//this is a mock function that replaces the window.alert function, it allows us to test if the alert function is called in the code
+//.mockImplementation(() => { }) replaces the original alert method with an empty function. This means that when window.
+//alert is called during the test, it won't actually display an alert dialog; instead, it will just execute the empty function.
+//Prevent actual alerts: This is useful in tests to prevent actual alert dialogs from appearing, which can be disruptive.
+//Track calls: It allows you to track how many times alert was called, with what arguments, etc., without triggering the actual behavior.
+//the very most bottom test deals with this code
+
 
 beforeAll(() => {
     let fs = require("fs");
@@ -105,6 +117,11 @@ describe('gameplay functions work correctly', () => {
         playerTurnCompare();
         expect(game.score).toBe(1);
 
+    });
+    test('should call newGame if the turn is incorrect', () => {
+        game.playerMoves.push("wrong");
+        playerTurnCompare();
+        expect(window.alert).toBeCalledWith('Wrong move!');
     });
 
 });
