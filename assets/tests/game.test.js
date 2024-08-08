@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-const { game, newGame, showScore, addTurn, lightsOn } = require("/workspace/JestTesting/assets/scripts/game.js");
+const { game, newGame, showScore, addTurn, lightsOn, showTurns } = require("/workspace/JestTesting/assets/scripts/game.js");
 
 beforeAll(() => {
     let fs = require("fs");
@@ -77,5 +77,11 @@ describe('gameplay functions work correctly', () => {
         lightsOn(game.currentGame[0]);
         expect(button.classList).toContain("light");
     });
+    test('showTurns should update game.turnNumber', () => {
+            game.turnNumber = 42;
+            showTurns();
+            expect(game.turnNumber).toBe(0);
+        });
 
-});
+    });
+
