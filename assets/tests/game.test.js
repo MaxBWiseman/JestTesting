@@ -5,6 +5,7 @@
 const {
     default: JSDOMEnvironment
 } = require("jest-environment-jsdom");
+
 const {
     game,
     newGame,
@@ -122,6 +123,16 @@ describe('gameplay functions work correctly', () => {
         game.playerMoves.push("wrong");
         playerTurnCompare();
         expect(window.alert).toBeCalledWith('Wrong move!');
+    });
+    test('when showTurns is called, check if turnInProgress is true', () => {
+        showTurns();
+        expect(game.turnInProgress).toBe(true);
+    });
+    test('clicking during the computers sequence should not work', () => {
+        showTurns();
+        game.lastButton = '';
+        document.getElementById('button2').click();
+        expect(game.lastButton).toBe('');
     });
 
 });

@@ -15,10 +15,13 @@ const newGame = function () {
     for (let circle of document.querySelectorAll(".circle")) { //get all elements with the class .circle
         if (circle.getAttribute("data-listener") !== "true") { //if the data-listener attribute is not true
             circle.addEventListener("click", (e) => { //add an event listener to the circle
+                if(game.currentGame.length > 0 && !game.turnInProgress) {
                 let move = e.target.getAttribute("id"); //get the id of the circle the user has clicked
+                game.lastButton = move
                 lightsOn(move) //call the lightsOn function to flash the circle the user has clicked
                 game.playerMoves.push(move) //add the move to the playerMoves array
-                playerTurnCompare()
+                playerTurnCompare()//call the playerTurnCompare function to compare the player moves to the computer moves
+                }
             })
             circle.setAttribute("data-listener", "true") //set the data-listener attribute to true
         }
@@ -48,12 +51,14 @@ const lightsOn = (circ) => {
 
 
 const showTurns = () => {
+    game.turnInProgress = true;
     game.turnNumber = 0;
     let turns = setInterval(() => { //setInterval allows a loop at a declared rate,here is every 800miliseconds it loops
         lightsOn(game.currentGame[game.turnNumber]); //goes through the current game array at the indices of the turnNumber
         game.turnNumber++; //increase turnNumber index to allow iteration through the array
         if (game.turnNumber >= game.currentGame.length) { //if turnNumber is equal or greater than currentGame array, stops the interval
             clearInterval(turns);
+            game.turnInProgress = false;
         }
     }, 800) //800miliseconds, this is where to declare the speed of loop for setInterval()
 }
